@@ -32,8 +32,8 @@ async function renderLoginPage(req, res) {
 async function handleUserLogin(req, res) {
   const { email, password } = req.body;
   const user = await USER.findOne({ email });
-  if(user) {
-    await bcrypt.compare(password, user.password);
+  const isUserAuthenticated = await bcrypt.compare(password, user.password);
+  if(isUserAuthenticated) {
     req.session.user = user;
   }
   if (!user) return res.render("login", { error: "Invalid email or password" });
