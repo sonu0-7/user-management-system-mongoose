@@ -24,7 +24,7 @@ function convertTimeToUTC530(maxAgeMinutes){
 // Express-Session
 app.use(cookieSession({
   name: "aisTech",
-  secret: process.env.secret,
+  secret: [process.env.secret],
   maxAge: convertTimeToUTC530(5),
 }));
 
