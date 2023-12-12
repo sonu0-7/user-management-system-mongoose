@@ -1,0 +1,27 @@
+<!-- Modal -->
+<div class="modal fade" id="newProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/product" method="post">
+          <div class="mb-3">
+            <label for="productTitle">Product Title</label>
+            <input type="text" name="productTitle" class="form-control" placeholder="Enter the product title" />
+          </div>
+          <div class="mb-3">
+            <label for="ProductName">Product Name</label>
+            <input type="text" name="productName" class="form-control" placeholder="Enter the product name" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-outline-success">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

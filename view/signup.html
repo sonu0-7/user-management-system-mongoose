@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UMS | Signup</title>
+  {% include "partials/headerScript.html" %}
+  {% include "partials/bodyScript.html" %}
+</head>
+
+<body>
+  {% include "partials/nav.html" %}
+  <h1 class="text-center">Signup</h1>
+  <form action="/user/signup" method="post">
+    <div class="mb-3">
+      <label for="name">Name</label>
+      <input type="text" name="name" class="form-control" placeholder="Enter your name" />
+    </div>
+    <div class="mb-3">
+      <label for="email">Email</label>
+      <input type="email" name="email" class="form-control" placeholder="Enter your email" />
+    </div>
+    <div class="mb-3">
+      <label for="password">Password</label>
+      <input type="password" name="password" class="form-control" placeholder="Enter your password" />
+    </div>
+
+    <button type="submit" class="btn btn-outline-success my-4 mx-1">Signup</button>
+  </form>
+</body>
+
+</html>

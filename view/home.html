@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UMS | Home</title>
+  {% include "partials/headerScript.html" %}
+  {% include "partials/bodyScript.html" %}
+  <script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function (){
+      $('#myTable').DataTable();
+    });
+  </script>
+</head>
+
+<body>
+  {% include "partials/nav.html" %}
+  {% include "product.html" %}
+  <button type="button" class="btn btn-outline-success my-4 mx-2" data-bs-toggle="modal" data-bs-target="#newProduct">
+    Add new product
+  </button>
+  
+  <!-- Product listing here -->
+  <table class="table table-striped" id="myTable">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Proudct Title</th>
+        <th scope="col">Proudct Name</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% asyncEach product in products %}
+      <tr data-id="{{product._id}}">
+        <td scope="col">{{loop.index}}</td>
+        <td scope="col">{{product.productTitle}}</td>
+        <td scope="col">{{product.productName}}</td>
+        <td scope="col">
+          <a href="product/edit/productId={{product._id}}" class="btn btn-success editbtn" data-bs-toggle="modal" data-bs-target="#editProduct">Edit</a>
+
+          <button type="button" class="btn btn-danger" onclick="deleteProduct('{{product._id}}')">Delete</button>
+        </td>
+      </tr>
+      {% endeach %}
+    </tbody>
+  </table>
+  <script src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js"></script>
+  {% include "edit.html" %}
+  <script>
+    function deleteProduct(id){
+      const result = confirm("Do you want to delete the product?");
+      if(result) document.location = "/product/delete?productId=" + id;
+    }
+
+    $(document).ready(function(){
+      $('.editbtn').on('click', function(){
+        $tr = $(this).closest('tr');
+        const productId = $tr.attr("data-id");
+        $(document).find('#editForm').attr("action",`/product/edit/${productId}`);
+        var data = $tr.children('td').map(function(){
+          return $(this).text();
+        }).get();
+        console.log(data);
+        $("#productId").val(productId)
+        $('#productTitle').val(data[1].trim());
+        $('#productName').val(data[2].trim());
+      })
+    })
+  </script>
+</body>
+
+</html>
